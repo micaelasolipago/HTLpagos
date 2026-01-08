@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Solipago - Fintech PropTech Ecosystem",
+  "description": "A disruptive cross-border payment platform for the Southern Cone, combining a temporary rental marketplace with a local settlement compensation engine.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
