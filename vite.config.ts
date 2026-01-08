@@ -29,13 +29,8 @@ export default defineConfig(({ mode }) => {
             }
           }
         },
-        // Compresión de assets
-        minify: 'terser',
-        terserOptions: {
-          compress: {
-            drop_console: true
-          }
-        }
+        // Minificación con esbuild (incluido en Vite)
+        minify: 'esbuild'
       }
     };
 });
