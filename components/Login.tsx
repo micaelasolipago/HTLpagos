@@ -1,19 +1,44 @@
 import React, { useState } from 'react';
-import { Mail, Lock, Home, Calendar, LogIn } from 'lucide-react';
+import { Mail, Lock, Home, Calendar, LogIn, AlertCircle, Loader } from 'lucide-react';
+import { signIn, signUp } from '../services/supabaseClient';
 
 interface LoginProps {
-  onLogin: (userType: 'guest' | 'owner' | 'renter') => void;
+  onLogin: (userType: 'guest' | 'owner' | 'renter', user?: any) => void;
 }
 
 const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState<'owner' | 'renter'>('renter');
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email && password) {
-      onLogin(userType);
+    setError('');
+    setLoading(true);
+
+    try {
+      if (email && password) {
+        let result;
+        
+        if (isSignUp) {
+          result = await signUp(email, password, userType === 'owner' ? 'propietario' : 'viajero');
+        } else {
+          result = await signIn(email, password);
+        }
+
+        if (result.success) {
+          onLogin(userType, result.data.user);
+        } else {
+          setError(result.error || 'Error en autenticación');
+        }
+      }
+    } catch (err: any) {
+      setError(err.message || 'Error inesperado');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,6 +90,14 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-1 sm:mb-2">Bienvenido</h2>
           <p className="text-sm sm:text-base text-slate-500 mb-6 sm:mb-8">Inicia sesión para acceder a tu cuenta</p>
+
+          {/* Error Message */}
+          {error && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex gap-3">
+              <AlertCircle size={20} className="text-red-500 flex-shrink-0 mt-0.5" />
+              <p className="text-sm text-red-700">{error}</p>
+            </div>
+          )}
 
           {/* User Type Selection */}
           <div className="flex gap-2 sm:gap-4 mb-6 sm:mb-8">
@@ -126,12 +159,38 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-3 sm:py-3 rounded-lg font-bold hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-4 sm:mt-6 text-sm sm:text-base"
+              disabled={loading}
+              className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-3 sm:py-3 rounded-lg font-bold hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-4 sm:mt-6 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <LogIn size={18} />
-              Inicia Sesión
+              {loading ? <Loader size={18} className="animate-spin" /> : <LogIn size={18} />}
+              {isSignUp ? 'Crear Cuenta' : 'Inicia Sesión'}
             </button>
           </form>
+
+          {/* Sign Up Toggle */}
+          <div className="text-center text-sm sm:text-base mb-6">
+            {isSignUp ? (
+              <>
+                ¿Ya tienes cuenta?{' '}
+                <button
+                  onClick={() => setIsSignUp(false)}
+                  className="text-emerald-600 font-bold hover:underline"
+                >
+                  Inicia sesión
+                </button>
+              </>
+            ) : (
+              <>
+                ¿No tienes cuenta?{' '}
+                <button
+                  onClick={() => setIsSignUp(true)}
+                  className="text-emerald-600 font-bold hover:underline"
+                >
+                  Crear cuenta
+                </button>
+              </>
+            )}
+          </div>
 
           {/* Divider */}
           <div className="flex items-center gap-3 sm:gap-4 my-4 sm:my-6">
