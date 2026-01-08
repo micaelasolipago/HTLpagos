@@ -143,10 +143,10 @@ const PropertyManagement: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50 lg:bg-gradient-to-br lg:from-slate-50 lg:to-blue-50 p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50 lg:bg-gradient-to-br lg:from-slate-50 lg:to-blue-50 p-3 sm:p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
           <div>
             <h1 className="text-3xl md:text-4xl font-bold text-slate-900">Mis Propiedades</h1>
             <p className="text-slate-600 mt-2">Gestiona tus alojamientos y fotos</p>
@@ -154,7 +154,7 @@ const PropertyManagement: React.FC = () => {
           {!showForm && (
             <button
               onClick={() => setShowForm(true)}
-              className="w-full md:w-auto flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-lg font-bold transition-all shadow-lg"
+              className="w-full md:w-auto flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 sm:px-6 py-3 sm:py-3 rounded-lg font-bold transition-all shadow-lg text-sm sm:text-base"
             >
               <Plus size={20} />
               Nueva Propiedad
@@ -348,7 +348,7 @@ const PropertyManagement: React.FC = () => {
         )}
 
         {/* Properties Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {properties.map((property) => (
             <div
               key={property.id}

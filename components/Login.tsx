@@ -58,16 +58,16 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
       <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 md:px-16 bg-white lg:bg-white">
         <div className="max-w-md w-full mx-auto">
           {/* Logo for mobile */}
-          <div className="lg:hidden flex items-center gap-3 mb-12">
-            <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center font-bold text-xl text-white">S</div>
-            <h1 className="text-2xl font-bold text-slate-900">Solipago</h1>
+          <div className="lg:hidden flex items-center gap-2 mb-8 sm:mb-10">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-500 rounded-xl flex items-center justify-center font-bold text-lg sm:text-xl text-white">S</div>
+            <h1 className="text-xl sm:text-2xl font-bold text-slate-900">Solipago</h1>
           </div>
 
-          <h2 className="text-3xl font-bold text-slate-900 mb-2">Bienvenido</h2>
-          <p className="text-slate-500 mb-8">Inicia sesión para acceder a tu cuenta</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-1 sm:mb-2">Bienvenido</h2>
+          <p className="text-sm sm:text-base text-slate-500 mb-6 sm:mb-8">Inicia sesión para acceder a tu cuenta</p>
 
           {/* User Type Selection */}
-          <div className="flex gap-4 mb-8">
+          <div className="flex gap-2 sm:gap-4 mb-6 sm:mb-8">
             <button
               onClick={() => setUserType('renter')}
               className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 ${
@@ -93,32 +93,32 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           </div>
 
           {/* Login Form */}
-          <form onSubmit={handleSubmit} className="space-y-4 mb-6">
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 mb-6">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Correo Electrónico</label>
+              <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-1 sm:mb-2">Correo Electrónico</label>
               <div className="relative">
-                <Mail size={18} className="absolute left-3 top-3.5 text-slate-400" />
+                <Mail size={16} className="absolute left-3 top-3 sm:top-3.5 text-slate-400" />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="tu@email.com"
-                  className="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-2.5 sm:py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm sm:text-base"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Contraseña</label>
+              <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-1 sm:mb-2">Contraseña</label>
               <div className="relative">
-                <Lock size={18} className="absolute left-3 top-3.5 text-slate-400" />
+                <Lock size={16} className="absolute left-3 top-3 sm:top-3.5 text-slate-400" />
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-2.5 sm:py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm sm:text-base"
                   required
                 />
               </div>
@@ -126,7 +126,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-2.5 rounded-lg font-bold hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-6"
+              className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-3 sm:py-3 rounded-lg font-bold hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-4 sm:mt-6 text-sm sm:text-base"
             >
               <LogIn size={18} />
               Inicia Sesión
@@ -134,22 +134,22 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           </form>
 
           {/* Divider */}
-          <div className="flex items-center gap-4 my-6">
+          <div className="flex items-center gap-3 sm:gap-4 my-4 sm:my-6">
             <div className="flex-1 h-px bg-slate-200"></div>
-            <span className="text-sm text-slate-500">o</span>
+            <span className="text-xs sm:text-sm text-slate-500">o</span>
             <div className="flex-1 h-px bg-slate-200"></div>
           </div>
 
           {/* Guest Access */}
           <button
             onClick={handleGuestAccess}
-            className="w-full border-2 border-slate-200 text-slate-700 py-2.5 rounded-lg font-bold hover:bg-slate-50 transition-all"
+            className="w-full border-2 border-slate-200 text-slate-700 py-3 sm:py-3 rounded-lg font-bold hover:bg-slate-50 transition-all text-sm sm:text-base"
           >
             Acceso como Invitado
           </button>
 
           {/* Footer */}
-          <p className="text-center text-xs text-slate-500 mt-8">
+          <p className="text-center text-xs sm:text-sm text-slate-500 mt-6 sm:mt-8">
             ¿No tienes cuenta? <a href="#" className="text-emerald-600 font-bold hover:underline">Regístrate aquí</a>
           </p>
         </div>
