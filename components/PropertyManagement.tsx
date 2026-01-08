@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Upload, Trash2, Edit2, Plus, X, MapPin, DollarSign, Type, Home } from 'lucide-react';
 import { Country } from '../types';
+import OptimizedImage from './OptimizedImage';
 
 interface PropertyImage {
   id: string;
@@ -306,10 +307,11 @@ const PropertyManagement: React.FC = () => {
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {uploadedImages.map((img) => (
                       <div key={img.id} className="relative group">
-                        <img
+                        <OptimizedImage
                           src={img.url}
                           alt={img.name}
-                          className="w-full h-40 object-cover rounded-lg shadow-md"
+                          className="w-full h-40 rounded-lg shadow-md"
+                          priority={false}
                         />
                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-all rounded-lg flex items-center justify-center">
                           <button
@@ -357,10 +359,11 @@ const PropertyManagement: React.FC = () => {
               {/* Image Carousel */}
               <div className="relative w-full h-48 bg-slate-200">
                 {property.images.length > 0 && (
-                  <img
+                  <OptimizedImage
                     src={property.images[0].url}
                     alt={property.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-48"
+                    priority={false}
                   />
                 )}
                 <div className="absolute top-2 right-2 bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-bold">

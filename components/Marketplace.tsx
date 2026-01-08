@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Star, MapPin, Heart, Zap, Search as SearchIcon, SlidersHorizontal, Calendar } from 'lucide-react';
 import { Property, Country, User } from '../types';
+import OptimizedImage from './OptimizedImage';
 
 const MOCK_PROPERTIES: Property[] = [
   { id: 'p1', title: 'Penthouse de Lujo - Santiago', location: 'Las Condes, Chile', country: Country.CHILE, pricePerNight: 125, imageUrl: 'https://picsum.photos/seed/p1/800/600', rating: 4.9 },
@@ -104,10 +105,11 @@ const MarketplaceView: React.FC<{ user: User }> = ({ user }) => {
                 className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all overflow-hidden cursor-pointer group"
               >
                 <div className="relative w-full h-48 bg-slate-200 overflow-hidden">
-                  <img
+                  <OptimizedImage
                     src={property.imageUrl}
                     alt={property.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-48"
+                    priority={false}
                   />
                   <button className="absolute top-2 right-2 bg-white rounded-full p-2 shadow-lg hover:bg-slate-100 transition-all">
                     <Heart size={18} className="text-slate-600" />

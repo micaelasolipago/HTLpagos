@@ -15,7 +15,9 @@
     "lucide-react": "^0.562.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "recharts": "^3.6.0"
+    "recharts": "^3.6.0",
+    "blurhash": "^2.0.0",
+    "react-use-intersection": "^0.0.8"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
