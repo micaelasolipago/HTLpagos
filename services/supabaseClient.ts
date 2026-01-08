@@ -6,7 +6,12 @@ const SUPABASE_ANON_KEY = 'sb_publishable_pzghTu9agPHQeMRpGr2rUQ_i1tjPbGM';
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Auth functions
-export const signUp = async (email: string, password: string, userType: 'viajero' | 'propietario') => {
+export const signUp = async (
+  email: string,
+  password: string,
+  userType: 'viajero' | 'propietario',
+  fullName?: string
+) => {
   try {
     const { data, error } = await supabase.auth.signUp({
       email,
@@ -14,6 +19,7 @@ export const signUp = async (email: string, password: string, userType: 'viajero
       options: {
         data: {
           user_type: userType,
+          full_name: fullName ?? null,
         },
       },
     });

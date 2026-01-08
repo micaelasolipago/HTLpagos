@@ -21,9 +21,18 @@ const App: React.FC = () => {
     walletBalance: 1250.50
   });
 
-  const handleLogin = (type: 'guest' | 'owner' | 'renter') => {
+  const handleLogin = (type: 'guest' | 'owner' | 'renter', userObj?: any) => {
     setUserType(type);
     setIsAuthenticated(true);
+    if (userObj) {
+      setUser({
+        id: userObj.id,
+        name: userObj.user_metadata?.full_name || userObj.email || 'Usuario',
+        email: userObj.email || 'usuario@deptoypago.com',
+        country: Country.ARGENTINA,
+        walletBalance: 0
+      });
+    }
   };
 
   const handleLogout = () => {

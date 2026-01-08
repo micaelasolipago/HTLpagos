@@ -9,6 +9,7 @@ interface LoginProps {
 const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [fullName, setFullName] = useState('');
   const [userType, setUserType] = useState<'owner' | 'renter'>('renter');
   const [isSignUp, setIsSignUp] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -24,15 +25,31 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         let result;
         
         if (isSignUp) {
-          result = await signUp(email, password, userType === 'owner' ? 'propietario' : 'viajero');
+          result = await signUp(
+            email,
+            password,
+            userType === 'owner' ? 'propietario' : 'viajero',
+            fullName
+          );
+
+          if (result.success) {
+            // Supabase may require email confirmation; user may be null until confirmed
+            const signupUser = result.data?.user;
+            if (signupUser) {
+              onLogin(userType, signupUser);
+            } else {
+              setError('Registro enviado. Revisa tu correo para confirmar la cuenta.');
+            }
+          } else {
+            setError(result.error || 'Error en el registro');
+          }
         } else {
           result = await signIn(email, password);
-        }
-
-        if (result.success) {
-          onLogin(userType, result.data.user);
-        } else {
-          setError(result.error || 'Error en autenticación');
+          if (result.success) {
+            onLogin(userType, result.data.user);
+          } else {
+            setError(result.error || 'Error en autenticación');
+          }
         }
       }
     } catch (err: any) {
@@ -127,6 +144,18 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
           {/* Login Form */}
           <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 mb-6">
+            {isSignUp && (
+              <div>
+                <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-1 sm:mb-2">Nombre Completo</label>
+                <input
+                  type="text"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  placeholder="Tu nombre completo"
+                  className="w-full pr-4 py-2.5 sm:py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm sm:text-base"
+                />
+              </div>
+            )}
             <div>
               <label className="block text-xs sm:text-sm font-medium text-slate-700 mb-1 sm:mb-2">Correo Electrónico</label>
               <div className="relative">
