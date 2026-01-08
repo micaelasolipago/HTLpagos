@@ -1,4 +1,4 @@
-# 🚀 Solipago - Optimización de Performance para Imágenes de Alta Calidad
+# 🚀 Deptoypago - Optimización de Performance para Imágenes de Alta Calidad
 
 ## 📋 Estrategia de Optimización Implementada
 

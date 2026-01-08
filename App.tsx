@@ -16,7 +16,7 @@ const App: React.FC = () => {
   const [user, setUser] = useState<User>({
     id: 'usr-001',
     name: 'Usuario',
-    email: 'usuario@solipago.com',
+    email: 'usuario@deptoypago.com',
     country: Country.ARGENTINA,
     walletBalance: 1250.50
   });
@@ -42,7 +42,7 @@ const App: React.FC = () => {
         <div className="flex items-center justify-between px-4 py-4">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center font-bold text-white text-sm">S</div>
-            <h1 className="font-bold text-slate-900">Solipago</h1>
+            <h1 className="font-bold text-slate-900">Deptoypago</h1>
           </div>
           <button
             onClick={handleLogout}
@@ -60,7 +60,7 @@ const App: React.FC = () => {
           <div className="p-6 flex items-center gap-3">
             <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center font-bold text-xl text-white">S</div>
             <div>
-              <h1 className="text-xl font-bold tracking-tight">Solipago</h1>
+              <h1 className="text-xl font-bold tracking-tight">Deptoypago</h1>
               <p className="text-[10px] text-slate-400 uppercase tracking-widest">Southern Cone Hub</p>
             </div>
           </div>

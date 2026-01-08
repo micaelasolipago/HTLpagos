@@ -27,7 +27,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
       <div className="hidden lg:flex lg:w-1/2 bg-slate-900 text-white flex-col justify-center px-12">
         <div className="mb-12">
           <div className="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center font-bold text-2xl mb-6">S</div>
-          <h1 className="text-5xl font-bold mb-4">Solipago</h1>
+          <h1 className="text-5xl font-bold mb-4">Deptoypago</h1>
           <p className="text-lg text-slate-400">Plataforma Regional de Pagos y Alojamientos</p>
         </div>
 
@@ -60,7 +60,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           {/* Logo for mobile */}
           <div className="lg:hidden flex items-center gap-2 mb-8 sm:mb-10">
             <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-500 rounded-xl flex items-center justify-center font-bold text-lg sm:text-xl text-white">S</div>
-            <h1 className="text-xl sm:text-2xl font-bold text-slate-900">Solipago</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-slate-900">Deptoypago</h1>
           </div>
 
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-1 sm:mb-2">Bienvenido</h2>
