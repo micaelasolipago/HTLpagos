@@ -15,10 +15,20 @@
 4. Ejecuta la query
 5. ✅ Listo! Se crearán todas las tablas automáticamente
 
-### 3. Credenciales ya Configuradas
-El proyecto ya tiene las credenciales en `services/supabaseClient.ts`:
-- **Project URL**: https://xepnqkngtnndquygdcms.supabase.co
-- **Anon Key**: sb_publishable_pzghTu9agPHQeMRpGr2rUQ_i1tjPbGM
+### 3. Configurar credenciales (ENV)
+No guardes claves en el código. El proyecto ahora lee las credenciales desde variables de entorno (Vite):
+
+```
+VITE_SUPABASE_URL=https://<your-project>.supabase.co
+VITE_SUPABASE_ANON_KEY=sb_publishable_....
+```
+
+Pasos:
+1. Crea un archivo `.env` en la raíz (no lo commits). Usa `.env.example` como plantilla.
+2. Para Vercel: en tu proyecto → Settings → Environment Variables, añade `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` (setea para `Production`).
+3. Reinicia el deploy si es necesario.
+
+El archivo `services/supabaseClient.ts` usa `import.meta.env.VITE_SUPABASE_URL` y `import.meta.env.VITE_SUPABASE_ANON_KEY`.
 
 ### 4. Estructura de Base de Datos
 

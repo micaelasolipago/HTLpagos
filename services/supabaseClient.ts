@@ -1,7 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = 'https://xepnqkngtnndquygdcms.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_pzghTu9agPHQeMRpGr2rUQ_i1tjPbGM';
+// Read Supabase credentials from environment variables.
+// For Vite, prefix client-exposed vars with VITE_.
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://xepnqkngtnndquygdcms.supabase.co';
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_pzghTu9agPHQeMRpGr2rUQ_i1tjPbGM';
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
