@@ -22,7 +22,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-emerald-50 to-blue-50">
+    <div className="flex h-screen bg-gradient-to-br from-emerald-50 to-blue-50 lg:bg-gradient-to-r lg:from-slate-900 lg:to-slate-900">
       {/* Left Section - Branding */}
       <div className="hidden lg:flex lg:w-1/2 bg-slate-900 text-white flex-col justify-center px-12">
         <div className="mb-12">
@@ -55,7 +55,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
       </div>
 
       {/* Right Section - Login Form */}
-      <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 md:px-16">
+      <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 md:px-16 bg-white lg:bg-white">
         <div className="max-w-md w-full mx-auto">
           {/* Logo for mobile */}
           <div className="lg:hidden flex items-center gap-3 mb-12">
