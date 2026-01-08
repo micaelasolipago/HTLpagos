@@ -1,0 +1,161 @@
+import React, { useState } from 'react';
+import { Mail, Lock, Home, Calendar, LogIn } from 'lucide-react';
+
+interface LoginProps {
+  onLogin: (userType: 'guest' | 'owner' | 'renter') => void;
+}
+
+const Login: React.FC<LoginProps> = ({ onLogin }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [userType, setUserType] = useState<'owner' | 'renter'>('renter');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email && password) {
+      onLogin(userType);
+    }
+  };
+
+  const handleGuestAccess = () => {
+    onLogin('guest');
+  };
+
+  return (
+    <div className="flex h-screen bg-gradient-to-br from-emerald-50 to-blue-50">
+      {/* Left Section - Branding */}
+      <div className="hidden lg:flex lg:w-1/2 bg-slate-900 text-white flex-col justify-center px-12">
+        <div className="mb-12">
+          <div className="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center font-bold text-2xl mb-6">S</div>
+          <h1 className="text-5xl font-bold mb-4">Solipago</h1>
+          <p className="text-lg text-slate-400">Plataforma Regional de Pagos y Alojamientos</p>
+        </div>
+
+        <div className="space-y-8 mt-16">
+          <div className="flex gap-4">
+            <div className="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+              <Home size={24} className="text-emerald-400" />
+            </div>
+            <div>
+              <h3 className="font-bold text-lg mb-1">Propietarios</h3>
+              <p className="text-slate-400">Publica tus alquileres y gestiona reservas en tiempo real.</p>
+            </div>
+          </div>
+
+          <div className="flex gap-4">
+            <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+              <Calendar size={24} className="text-blue-400" />
+            </div>
+            <div>
+              <h3 className="font-bold text-lg mb-1">Viajeros</h3>
+              <p className="text-slate-400">Descubre y reserva alojamientos en la región.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Section - Login Form */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 md:px-16">
+        <div className="max-w-md w-full mx-auto">
+          {/* Logo for mobile */}
+          <div className="lg:hidden flex items-center gap-3 mb-12">
+            <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center font-bold text-xl text-white">S</div>
+            <h1 className="text-2xl font-bold text-slate-900">Solipago</h1>
+          </div>
+
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">Bienvenido</h2>
+          <p className="text-slate-500 mb-8">Inicia sesión para acceder a tu cuenta</p>
+
+          {/* User Type Selection */}
+          <div className="flex gap-4 mb-8">
+            <button
+              onClick={() => setUserType('renter')}
+              className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 ${
+                userType === 'renter'
+                  ? 'bg-blue-500 text-white shadow-lg'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              }`}
+            >
+              <Calendar size={18} />
+              Viajero
+            </button>
+            <button
+              onClick={() => setUserType('owner')}
+              className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 ${
+                userType === 'owner'
+                  ? 'bg-emerald-500 text-white shadow-lg'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              }`}
+            >
+              <Home size={18} />
+              Propietario
+            </button>
+          </div>
+
+          {/* Login Form */}
+          <form onSubmit={handleSubmit} className="space-y-4 mb-6">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Correo Electrónico</label>
+              <div className="relative">
+                <Mail size={18} className="absolute left-3 top-3.5 text-slate-400" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="tu@email.com"
+                  className="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Contraseña</label>
+              <div className="relative">
+                <Lock size={18} className="absolute left-3 top-3.5 text-slate-400" />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  required
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-2.5 rounded-lg font-bold hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-6"
+            >
+              <LogIn size={18} />
+              Inicia Sesión
+            </button>
+          </form>
+
+          {/* Divider */}
+          <div className="flex items-center gap-4 my-6">
+            <div className="flex-1 h-px bg-slate-200"></div>
+            <span className="text-sm text-slate-500">o</span>
+            <div className="flex-1 h-px bg-slate-200"></div>
+          </div>
+
+          {/* Guest Access */}
+          <button
+            onClick={handleGuestAccess}
+            className="w-full border-2 border-slate-200 text-slate-700 py-2.5 rounded-lg font-bold hover:bg-slate-50 transition-all"
+          >
+            Acceso como Invitado
+          </button>
+
+          {/* Footer */}
+          <p className="text-center text-xs text-slate-500 mt-8">
+            ¿No tienes cuenta? <a href="#" className="text-emerald-600 font-bold hover:underline">Regístrate aquí</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
